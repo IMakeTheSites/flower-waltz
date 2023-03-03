@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Title from '../components/Title';
 
 function HomePage() {
   return (
@@ -6,8 +7,9 @@ function HomePage() {
       <Head>
         <title>Waltz of the Flowers Shop</title>
       </Head>
-      <main>
-        <h1>Waltz of the Flowers Shop</h1>
+      <main className="px-6 py-4">
+        <Title>Waltz of the Flowers Shop</Title>
+        <p>[TODO]: add products</p>
       </main>
     </>
   );
