@@ -1,12 +1,17 @@
+// Option 2: fetch products on the client side (useEffect)
+
 import Head from 'next/head';
 import Title from '../components/Title';
 
-const products = [
-  { id: 1, title: 'First Product' },
-  { id: 2, title: 'Second Product' },
-];
+export async function getStaticProps() {
+  console.log('[HomePage] getStaticProps()');
+  const response = await fetch('http://127.0.0.1:1337/products');
+  const products = await response.json();
+  return { props: { products } };
+}
 
-function HomePage() {
+function HomePage({ products }) {
+  console.log('[HomePage] render:', products);
   return (
     <>
       <Head>
