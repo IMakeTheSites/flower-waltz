@@ -1,17 +1,18 @@
-// Option 2: fetch products on the client side (useEffect)
+// Option 1: fetch products on the server side (getStaticProps)
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import { getProducts } from '@/lib/products';
 
-function HomePage() {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    getProducts().then(setProducts);
-  }, []);
+export async function getServerSideProps() {
+  console.log('[HomePage] getServerSideProps()');
+  const products = await getProducts();
+  return {
+    props: { products },
+  };
+}
 
-  console.log('[HomePage] index2 render:', products);
-
+function HomePage({ products }) {
+  console.log('[HomePage] render:', products);
   return (
     <>
       <Head>
