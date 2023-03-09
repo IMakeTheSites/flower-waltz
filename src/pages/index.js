@@ -21,7 +21,7 @@ function HomePage({ products }) {
       </Head>
       <main className="px-6 py-4">
         <Title>Waltz of the Flowers Shop</Title>
-        <ul>
+        <ul className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">
           {products.map((product) => (
             <li key={product.id}>
               <ProductCard product={product} />
