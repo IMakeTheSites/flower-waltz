@@ -1,7 +1,6 @@
-import Head from 'next/head';
-import Title from '../components/Title';
 import { getProducts } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
+import Page from '@/components/Page';
 
 export async function getStaticProps() {
   console.log('[HomePage] getStaticProps()');
@@ -15,21 +14,15 @@ export async function getStaticProps() {
 function HomePage({ products }) {
   console.log('[HomePage] render:', products);
   return (
-    <>
-      <Head>
-        <title>Waltz of the Flowers Shop</title>
-      </Head>
-      <main className="px-6 py-4">
-        <Title>Waltz of the Flowers Shop</Title>
-        <ul className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">
-          {products.map((product) => (
-            <li key={product.id}>
-              <ProductCard product={product} />
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+    <Page title="Indoor Plants">
+      <ul className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">
+        {products.map((product) => (
+          <li key={product.id}>
+            <ProductCard product={product} />
+          </li>
+        ))}
+      </ul>
+    </Page>
   );
 }
 

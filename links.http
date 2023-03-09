@@ -1,0 +1,11 @@
+GET http://localhost:1337/cart-items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc4Mzg2NTg2LCJleHAiOjE2ODA5Nzg1ODZ9.LJKUwE-d1MxQaHgIS5wIexCKVbpqKhKTu3I_CxFBD6Q
+
+###
+POST http://localhost:1337/auth/local
+Content-Type: application/json
+
+{
+    "identifier": "alice@example.com",
+    "password": "Alice123"
+}
