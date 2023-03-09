@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Title from '../components/Title';
 import { getProducts } from '@/lib/products';
-import Link from 'next/link';
+import ProductCard from '@/components/ProductCard';
 
 export async function getStaticProps() {
   console.log('[HomePage] getStaticProps()');
@@ -24,7 +24,7 @@ function HomePage({ products }) {
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              <Link href={`/products/${product.id}`}>{product.title}</Link>
+              <ProductCard product={product} />
             </li>
           ))}
         </ul>
