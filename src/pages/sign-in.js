@@ -5,7 +5,7 @@ import Input from '@/components/Input';
 import Page from '@/components/Page';
 import { fetchJson } from '@/lib/api';
 import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -15,6 +15,7 @@ function SignInPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const queryClient = useQueryClient();
   const mutation = useMutation(() =>
     fetchJson('/api/login', {
       method: 'POST',
@@ -28,6 +29,7 @@ function SignInPage() {
     await sleep(2000);
     try {
       const user = await mutation.mutateAsync();
+      queryClient.setQueryData('user', user);
       console.log('signed in:', user);
       router.push('/');
     } catch (err) {
