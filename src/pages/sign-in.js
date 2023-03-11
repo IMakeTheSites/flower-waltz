@@ -2,15 +2,33 @@ import Button from '@/components/Button';
 import Field from '@/components/Field';
 import Input from '@/components/Input';
 import Page from '@/components/Page';
+import { fetchJson } from '@/lib/api';
 import { useState } from 'react';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [status, setStatus] = useState({ loading: false, error: false });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('should submit:', { email, password });
+    setStatus({ loading: true, error: false });
+    await sleep(2000);
+    try {
+      const response = await fetchJson('http://localhost:1337/auth/local', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: email, password }),
+      });
+      setStatus({ loading: false, error: false });
+      console.log('sign in:', response);
+    } catch (err) {
+      setStatus({ loading: false, error: true });
+    }
   };
 
   return (
@@ -32,7 +50,12 @@ function SignInPage() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </Field>
-        <Button type="submit">Sign In</Button>
+        {status.error && <p className="text-red-700">Invalid Credentials</p>}
+        {status.loading ? (
+          <p>Loading...</p>
+        ) : (
+          <Button type="submit">Sign In</Button>
+        )}
       </form>
     </Page>
   );
