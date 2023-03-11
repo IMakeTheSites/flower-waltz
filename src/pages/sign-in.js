@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import Field from '@/components/Field';
 import Input from '@/components/Input';
@@ -10,6 +11,7 @@ function sleep(ms) {
 }
 
 function SignInPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState({ loading: false, error: false });
@@ -26,6 +28,7 @@ function SignInPage() {
       });
       setStatus({ loading: false, error: false });
       console.log('sign in:', response);
+      router.push('/');
     } catch (err) {
       setStatus({ loading: false, error: true });
     }
