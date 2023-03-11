@@ -1,14 +1,9 @@
-import { useUser } from '@/hooks/user';
-import { fetchJson } from '@/lib/api';
+import { useSignOut, useUser } from '@/hooks/user';
 import Link from 'next/link';
 
 function NavBar() {
   const user = useUser();
-
-  const handleSignOut = async () => {
-    await fetchJson('/api/logout');
-    // setUser(undefined);
-  };
+  const signOut = useSignOut();
 
   console.log('[NavBar] user:', user);
   return (
@@ -22,7 +17,7 @@ function NavBar() {
           <>
             <li>{user.name}</li>
             <li>
-              <button onClick={handleSignOut}>Sign Out</button>
+              <button onClick={signOut}>Sign Out</button>
             </li>
           </>
         ) : (

@@ -25,6 +25,15 @@ export function useSignIn() {
   };
 }
 
+export function useSignOut() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(() => fetchJson('/api/logout'));
+  return async () => {
+    await mutation.mutateAsync();
+    queryClient.setQueryData('user', undefined);
+  };
+}
+
 export function useUser() {
   const query = useQuery(
     'user',
