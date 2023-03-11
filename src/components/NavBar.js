@@ -15,6 +15,7 @@ function NavBar() {
         <li role="separator" className="flex-1" />
         {user ? (
           <>
+            <Link href="/cart">Cart</Link>
             <li>{user.name}</li>
             <li>
               <button onClick={signOut}>Sign Out</button>
