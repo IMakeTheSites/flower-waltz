@@ -1,6 +1,6 @@
-import Page from '@/components/Page';
-import { fetchJson } from '@/lib/api';
 import { useQuery } from 'react-query';
+import Page from '../components/Page';
+import { fetchJson } from '../lib/api';
 
 function formatCurrency(value) {
   return '$' + value.toFixed(2);
@@ -59,7 +59,7 @@ function CartPage() {
   const query = useQuery('cartItems', () => fetchJson('/api/cart'));
   const cartItems = query.data;
 
-  console.log('[CartPage]', cartItems);
+  console.log('[CartPage] cartItems:', cartItems);
   return (
     <Page title="Cart">{cartItems && <CartTable cartItems={cartItems} />}</Page>
   );
